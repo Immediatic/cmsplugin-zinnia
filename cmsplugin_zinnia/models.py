@@ -1,6 +1,6 @@
 """Models of Zinnia CMS Plugins"""
+from django.contrib.auth import get_user_model
 from django.db import models
-from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.db.models.signals import post_delete
 from django.utils.translation import ugettext_lazy as _
@@ -31,7 +31,7 @@ class LatestEntriesPlugin(CMSPlugin):
         _('include subcategories'), default=True,
         help_text=_('include the entries belonging the subcategories'))
     authors = models.ManyToManyField(
-        User, verbose_name=_('authors'), blank=True, null=True)
+        get_user_model(), verbose_name=_('authors'), blank=True, null=True)
     tags = models.ManyToManyField(
         Tag, verbose_name=_('tags'), blank=True, null=True)
 
